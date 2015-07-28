@@ -1,12 +1,10 @@
 // if (process.env.NODE_ENV !== 'production'){
 //   require('longjohn');
 // }
-var herokuPort = process.env.PORT || 5000;
-
 var filternet = require('filternet-cust');
 var EventEmitter = require("events").EventEmitter;
 var myProxy = filternet.createProxyServer({
-  port: herokuPort
+  port: 5000
 });
 var io = require('socket.io')(myProxy);
 var gsr = io.of("/gsr");
@@ -45,7 +43,6 @@ chunky.on("chunk", function(chunk){
   }
 });
 myProxy.on("shouldReject", function(request, callback){
-  console.log(request.headers.host);
   if (request.headers.host === "bandbroadcaster.azurewebsites.net"){
     callback(false);
   } else {
