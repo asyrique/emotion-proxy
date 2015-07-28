@@ -9,7 +9,31 @@ var myProxy = filternet.createProxyServer({
 var io = require('socket.io')(5001);
 var gsr = io.of("/gsr");
 gsr.on('connection', function(socket){
-  console.log("Someone connected");
+  console.log("Someone connected GSR");
+});
+var heartrate = io.of("/heartrate");
+heartrate.on('connection', function(socket){
+  console.log("Someone connected Heartrate");
+});
+var temp = io.of("/temp");
+temp.on('connection', function(socket){
+  console.log("Someone connected Temp");
+});
+var uv = io.of("/uv");
+uv.on('connection', function(socket){
+  console.log("Someone connected UV");
+});
+var lux = io.of("/lux");
+lux.on('connection', function(socket){
+  console.log("Someone connected Lux");
+});
+var stepcount = io.of("/stepcount");
+stepcount.on('connection', function(socket){
+  console.log("Someone connected Stepcount");
+});
+var motion = io.of("/motion");
+motion.on('connection', function(socket){
+  console.log("Someone connected Motion");
 });
 
 var chunky = new EventEmitter();
@@ -18,31 +42,37 @@ chunky.on("chunk", function(chunk){
   switch(data.A[0].Sensor) {
     case 1: {
       //console.log("Heartrate: " + data.A[0].Value);
+      heartrate.emit('data', {type: "heartrate", date:Date.now(),value: data.A[0].Value});
       }
     break;
     case 2: {
       //console.log("Temperature: " + data.A[0].Value);
+      temp.emit('data', {type: "temp", date:Date.now(),value: data.A[0].Value});
     }
     break;
     case 3: {
       //console.log("GSR: " + data.A[0].Value);
-      gsr.emit('data', {date:Date.now().toString(), data: data.A[0].Value});
+      gsr.emit('data', {type: "gsr", date:Date.now(),value: data.A[0].Value});
     }
     break;
     case 4: {
       //console.log("UV: " + data.A[0].Value);
+      uv.emit('data', {type: "uv", date:Date.now(),value: data.A[0].Value});
     }
     break;
     case 5: {
       //console.log("LUX: " + data.A[0].Value);
+      lux.emit('data', {type: "lux", date:Date.now(),value: data.A[0].Value});
     }
     break;
     case 6: {
       //console.log("Step Count: " + data.A[0].Value);
+      stepcount.emit('data', {type: "stepcount", date:Date.now(),value: data.A[0].Value});
     }
     break;
     case 8: {
       //console.log("Motion: " + data.A[0].Value);
+      motion.emit('data', {type: "motion", date:Date.now(),value: data.A[0].Value});
     }
     break;
     case 9: {

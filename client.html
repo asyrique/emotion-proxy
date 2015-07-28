@@ -6,9 +6,19 @@
     <title></title>
   </head>
   <body>
+    <h1>Heartrate</h1>
+    <h2 id="heartrate"></h2>
+    <h1>GSR</h2>
+    <h2 id="gsr"></h2>
     <script charset="utf-8">
-      var socket = io('http://asyrique.me:5001/gsr');
-      socket.on('data', function(data){
+      var gsrsocket = io('http://asyrique.me:5001/gsr');
+      gsrsocket.on('data', function(data){
+        document.getElementById("gsr").innerHTML = data.value;
+        console.log(data);
+      });
+      var heartsocket = io('http://asyrique.me:5001/heartrate');
+      heartsocket.on('data', function(data){
+        document.getElementById("heartrate").innerHTML = data.value;
         console.log(data);
       });
     </script>
