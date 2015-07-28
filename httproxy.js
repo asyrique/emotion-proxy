@@ -26,7 +26,7 @@ chunky.on("chunk", function(chunk){
     break;
     case 3: {
       console.log("GSR: " + data.A[0].Value);
-      gsr.emit(Date.now().toString(), data.A[0].Value);
+      gsr.emit('data', {date:Date.now().toString(), data: data.A[0].Value});
     }
     break;
     case 4: console.log("UV: " + data.A[0].Value);
