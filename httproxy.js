@@ -6,7 +6,7 @@ var EventEmitter = require("events").EventEmitter;
 var myProxy = filternet.createProxyServer({
   port: 5000
 });
-var io = require('socket.io')(myProxy);
+var io = require('socket.io')(5001);
 var gsr = io.of("/gsr");
 gsr.on('connection', function(socket){
   console.log("Someone connected");
@@ -17,27 +17,37 @@ chunky.on("chunk", function(chunk){
   eval(decodeURIComponent(chunk.toString()));
   switch(data.A[0].Sensor) {
     case 1: {
-      console.log("Heartrate: " + data.A[0].Value);
+      //console.log("Heartrate: " + data.A[0].Value);
       }
     break;
     case 2: {
-      console.log("Temperature: " + data.A[0].Value);
+      //console.log("Temperature: " + data.A[0].Value);
     }
     break;
     case 3: {
-      console.log("GSR: " + data.A[0].Value);
+      //console.log("GSR: " + data.A[0].Value);
       gsr.emit('data', {date:Date.now().toString(), data: data.A[0].Value});
     }
     break;
-    case 4: console.log("UV: " + data.A[0].Value);
+    case 4: {
+      //console.log("UV: " + data.A[0].Value);
+    }
     break;
-    case 5: console.log("LUX: " + data.A[0].Value);
+    case 5: {
+      //console.log("LUX: " + data.A[0].Value);
+    }
     break;
-    case 6: console.log("Step Count: " + data.A[0].Value);
+    case 6: {
+      //console.log("Step Count: " + data.A[0].Value);
+    }
     break;
-    case 8: console.log("Motion: " + data.A[0].Value);
+    case 8: {
+      //console.log("Motion: " + data.A[0].Value);
+    }
     break;
-    case 9: console.log("Battery: " + data.A[0].Value);
+    case 9: {
+      //console.log("Battery: " + data.A[0].Value);
+    }
     break;
     default: pass();
   }

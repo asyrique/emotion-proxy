@@ -7,4 +7,5 @@ RUN npm install
 ADD ./httproxy.js /srv/httproxy.js
 
 EXPOSE 5000
+EXPOSE 5001
 CMD ["node", "httproxy.js"]
