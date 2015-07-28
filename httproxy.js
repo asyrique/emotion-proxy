@@ -1,7 +1,7 @@
 // if (process.env.NODE_ENV !== 'production'){
 //   require('longjohn');
 // }
-var herokuPort = process.env.PORT || 80;
+var herokuPort = process.env.PORT || 5000;
 
 var filternet = require('filternet-cust');
 var EventEmitter = require("events").EventEmitter;
