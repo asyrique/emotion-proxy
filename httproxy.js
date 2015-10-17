@@ -4,9 +4,9 @@
 var filternet = require('filternet-cust');
 var EventEmitter = require("events").EventEmitter;
 var myProxy = filternet.createProxyServer({
-  port: 5000
+  port: process.env.PROXY_PORT || 5000
 });
-var io = require('socket.io')(5001);
+var io = require('socket.io')(process.env.BROADCAST_PORT || 5001);
 var gsr = io.of("/gsr");
 gsr.on('connection', function(socket){
   console.log("Someone connected GSR");
