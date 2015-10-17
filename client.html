@@ -11,12 +11,12 @@
     <h1>GSR</h2>
     <h2 id="gsr"></h2>
     <script charset="utf-8">
-      var gsrsocket = io('http://asyrique.me:5001/gsr');
+      var gsrsocket = io('http://dev.asyrique.me:8081/gsr');
       gsrsocket.on('data', function(data){
         document.getElementById("gsr").innerHTML = data.value;
         console.log(data);
       });
-      var heartsocket = io('http://asyrique.me:5001/heartrate');
+      var heartsocket = io('http://dev.asyrique.me:8081/heartrate');
       heartsocket.on('data', function(data){
         document.getElementById("heartrate").innerHTML = data.value;
         console.log(data);
